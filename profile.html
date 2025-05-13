@@ -1,0 +1,33 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile - SkillSwap Hub</title>
+  <link rel="stylesheet" href="styles/profile.css">
+  <script type="module" src="scripts/app.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SkillSwap <span>Hub</span></div>
+    <div class="nav-links">
+      <a href="dashboard.html">Home</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="skills.html">Edit Skills</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="form-container">
+    <h2>Edit Profile</h2>
+    <form id="profile-form">
+      <input type="text" id="full-name" placeholder="Full Name" required>
+      <input type="text" id="location" placeholder="Location">
+      <input type="text" id="profession" placeholder="Profession">
+      <textarea id="bio" placeholder="Short Bio" rows="4"></textarea>
+      <button type="submit">Save Profile</button>
+    </form>
+  </div>
+</body>
+</html>

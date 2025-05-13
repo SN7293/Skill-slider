@@ -1,0 +1,76 @@
+/* Auth Page Styles */
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.auth-form {
+  display: block;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  background-color: #5c67f2;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-form button:hover {
+  background-color: #434de3;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  font-size: 1rem;
+  color: #f44336;
+  margin-top: 1rem;
+}
+
+/* Form Toggle Button */
+.form-toggle button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-toggle button.active {
+  background-color: #5c67f2;
+  color: white;
+  border: 1px solid #5c67f2;
+}
+
+.form-toggle button:hover {
+  background-color: #434de3;
+}

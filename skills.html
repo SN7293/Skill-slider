@@ -1,0 +1,49 @@
+
+<!-- skills.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Skills - SkillSwap Hub</title>
+  <link rel="stylesheet" href="styles/profile.css">
+  <script type="module" src="scripts/app.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SkillSwap <span>Hub</span></div>
+    <div class="nav-links">
+      <a href="dashboard.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="skills.html" class="active">Edit Skills</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="form-container">
+    <h2>Edit Skills</h2>
+    <form id="skills-form">
+      <input type="text" id="skill-name" placeholder="Add a Skill">
+      <button type="button" id="add-skill">Add Skill</button>
+      <ul id="skills-list"></ul>
+      <button type="submit">Save Skills</button>
+    </form>
+  </div>
+
+  <script>
+    const skillInput = document.getElementById('skill-name');
+    const skillsList = document.getElementById('skills-list');
+    const addSkillBtn = document.getElementById('add-skill');
+
+    addSkillBtn.addEventListener('click', () => {
+      const skill = skillInput.value.trim();
+      if (skill) {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillsList.appendChild(li);
+        skillInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

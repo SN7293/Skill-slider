@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSwap Hub - Dashboard</title>
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <script type="module" src="scripts/app.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SkillSwap <span>Hub</span></div>
+    <div class="nav-links">
+      <a href="dashboard.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-content">
+      <h1>Welcome to Your Dashboard</h1>
+      <p>Here you can manage your profile, view your skills, and connect with others!</p>
+
+<section class="skills-section">
+        <h2>Your Skills</h2>
+        <div class="skill-cards" id="skills-list">
+          <!-- Example Skill Card -->
+          <div class="card">
+            <h3>Web Development</h3>
+            <p>Frontend and Backend Development</p>
+         
+          </div>
+          <div class="card">
+            <h3>Mobile Development</h3>
+            <p>Android & iOS App Development</p>
+          
+          </div>
+          <div class="card">
+            <h3>Data Science</h3>
+            <p>Machine Learning, Data Analysis</p>
+            
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      // Clear user session or token if using authentication
+      localStorage.removeItem('userToken'); // Example, adjust based on your setup
+      window.location.href = 'auth.html'; // Redirect to auth page
+    });
+  </script>
+</body>
+</html>
