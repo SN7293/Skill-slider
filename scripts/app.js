@@ -62,3 +62,7 @@ loginForm.addEventListener("submit", (e) => {
       console.error(errorMessage); // Debugging error
     });
 });
+// ===== Chat System =====
+if (document.querySelector('.chat-section')) {
+  // Keep chat-related JS code
+}

@@ -1,4 +1,3 @@
-
 <!-- skills.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -23,26 +22,64 @@
   <div class="form-container">
     <h2>Edit Skills</h2>
     <form id="skills-form">
-      <input type="text" id="skill-name" placeholder="Add a Skill">
-      <button type="button" id="add-skill">Add Skill</button>
-      <ul id="skills-list"></ul>
+      <div class="add-skill-group">
+        <input type="text" id="skill-name" placeholder="Skill Name">
+        <input type="text" id="skill-description" placeholder="Skill Description">
+        <button type="button" id="add-skill">Add Skill</button>
+      </div>
+      <ul id="skills-list">
+        <!-- Skills will be loaded here -->
+      </ul>
       <button type="submit">Save Skills</button>
     </form>
   </div>
 
   <script>
-    const skillInput = document.getElementById('skill-name');
+    const skillNameInput = document.getElementById('skill-name');
+    const skillDescInput = document.getElementById('skill-description');
     const skillsList = document.getElementById('skills-list');
     const addSkillBtn = document.getElementById('add-skill');
 
     addSkillBtn.addEventListener('click', () => {
-      const skill = skillInput.value.trim();
-      if (skill) {
+      const name = skillNameInput.value.trim();
+      const description = skillDescInput.value.trim();
+      if (name && description) {
         const li = document.createElement('li');
-        li.textContent = skill;
+        li.innerHTML = `
+          <input type="text" class="skill-name" value="${name}" placeholder="Skill Name">
+          <input type="text" class="skill-desc" value="${description}" placeholder="Description">
+        `;
         skillsList.appendChild(li);
-        skillInput.value = '';
+        skillNameInput.value = '';
+        skillDescInput.value = '';
       }
+    });
+
+    document.getElementById('skills-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const skills = Array.from(skillsList.children).map(li => {
+        const name = li.querySelector('.skill-name').value.trim();
+        const desc = li.querySelector('.skill-desc').value.trim();
+        return name && desc ? { name, description: desc } : null;
+      }).filter(skill => skill !== null);
+
+      localStorage.setItem('userSkills', JSON.stringify(skills));
+      alert('Skills saved!');
+      window.location.href = 'dashboard.html';
+    });
+
+    // Preload saved skills if any
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedSkills = JSON.parse(localStorage.getItem('userSkills')) || [];
+      skillsList.innerHTML = '';
+      savedSkills.forEach(skill => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <input type="text" class="skill-name" value="${skill.name}" placeholder="Skill Name">
+          <input type="text" class="skill-desc" value="${skill.description}" placeholder="Description">
+        `;
+        skillsList.appendChild(li);
+      });
     });
   </script>
 </body>

@@ -1,54 +1,91 @@
 /* profile.css */
+:root {
+  --primary: #6c5ce7;
+  --secondary: #a29bfe;
+  --dark: #2d3436;
+  --light: #f5f6fa;
+  --accent: #00cec9;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --glass-effect: blur(10px);
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+  color: var(--light);
 }
 
 .navbar {
-  background-color: #2e3a59;
-  color: #fff;
+  background: rgba(30, 30, 47, 0.8);
+  backdrop-filter: var(--glass-effect);
+  color: var(--light);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin: 20px;
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
 }
 
 .logo {
   font-size: 1.5em;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .logo span {
-  color: #6dd5ed;
+  color: var(--accent);
 }
 
 .nav-links a {
-  color: #fff;
+  color: var(--light);
   text-decoration: none;
   margin-left: 20px;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .nav-links a:hover,
 .nav-links .active {
-  color: #6dd5ed;
+  background: rgba(108, 92, 231, 0.2);
 }
 
 .form-container {
   max-width: 500px;
   margin: 50px auto;
-  background-color: #fff;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-effect);
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+  z-index: -1;
+  border-radius: 22px;
+  opacity: 0.3;
 }
 
 .form-container h2 {
   margin-bottom: 20px;
-  color: #2e3a59;
+  color: var(--light);
+  position: relative;
 }
 
 form input,
@@ -56,25 +93,37 @@ form textarea {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: var(--light);
   font-size: 1em;
+  transition: all 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(0, 206, 201, 0.2);
 }
 
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #2e3a59;
-  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: var(--light);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
 }
 
 form button:hover {
-  background-color: #1c253b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
 }
 
 #skills-list {
@@ -84,13 +133,15 @@ form button:hover {
 }
 
 #skills-list li {
-  background-color: #6dd5ed;
-  color: #fff;
-  padding: 10px 15px;
+  background: rgba(0, 206, 201, 0.2);
+  color: var(--accent);
+  padding: 8px 15px;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-radius: 25px;
   display: inline-block;
   margin-right: 10px;
+  border: 1px solid rgba(0, 206, 201, 0.3);
+  backdrop-filter: var(--glass-effect);
 }
 
 @media (max-width: 600px) {
@@ -101,8 +152,13 @@ form button:hover {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    margin: 10px;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    margin-top: 10px;
   }
   .nav-links a {
-    margin: 10px 0 0 0;
+    margin: 5px 0;
   }
 }

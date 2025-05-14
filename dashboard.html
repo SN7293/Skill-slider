@@ -1,3 +1,4 @@
+<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +12,9 @@
   <nav class="navbar">
     <div class="logo">SkillSwap <span>Hub</span></div>
     <div class="nav-links">
-      <a href="dashboard.html">Home</a>
+      <a href="dashboard.html" class="active">Home</a>
       <a href="profile.html">Profile</a>
+      <a href="skills.html">Edit Skills</a>
       <a href="#" id="logout-btn">Logout</a>
     </div>
   </nav>
@@ -22,25 +24,10 @@
       <h1>Welcome to Your Dashboard</h1>
       <p>Here you can manage your profile, view your skills, and connect with others!</p>
 
-<section class="skills-section">
+      <section>
         <h2>Your Skills</h2>
-        <div class="skill-cards" id="skills-list">
-          <!-- Example Skill Card -->
-          <div class="card">
-            <h3>Web Development</h3>
-            <p>Frontend and Backend Development</p>
-         
-          </div>
-          <div class="card">
-            <h3>Mobile Development</h3>
-            <p>Android & iOS App Development</p>
-          
-          </div>
-          <div class="card">
-            <h3>Data Science</h3>
-            <p>Machine Learning, Data Analysis</p>
-            
-          </div>
+        <div class="feature-cards" id="skills-section">
+          <!-- Skills will be dynamically inserted here -->
         </div>
       </section>
     </div>
@@ -49,9 +36,25 @@
   <script>
     // Logout functionality
     document.getElementById('logout-btn').addEventListener('click', () => {
-      // Clear user session or token if using authentication
-      localStorage.removeItem('userToken'); // Example, adjust based on your setup
-      window.location.href = 'auth.html'; // Redirect to auth page
+      localStorage.removeItem('userToken');
+      window.location.href = 'auth.html';
+    });
+
+    // Load and display skills
+    window.addEventListener('DOMContentLoaded', () => {
+      const skills = JSON.parse(localStorage.getItem('userSkills')) || [];
+      const skillsSection = document.getElementById('skills-section');
+
+      if (skills.length === 0) {
+        skillsSection.innerHTML = '<p>No skills added yet. Go to Edit Skills to add.</p>';
+      } else {
+        skillsSection.innerHTML = skills.map(skill => `
+          <div class="card">
+            <h3>${skill.name}</h3>
+            <p>${skill.description}</p>
+          </div>
+        `).join('');
+      }
     });
   </script>
 </body>
