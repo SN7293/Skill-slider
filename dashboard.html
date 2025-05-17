@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SkillSwap Hub - Dashboard</title>
-  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/dashboard.css" />
   <script type="module" src="scripts/app.js" defer></script>
 </head>
 <body>
@@ -40,22 +40,65 @@
       window.location.href = 'auth.html';
     });
 
-    // Load and display skills
+    // Load and display skills with endorsement feature
     window.addEventListener('DOMContentLoaded', () => {
       const skills = JSON.parse(localStorage.getItem('userSkills')) || [];
       const skillsSection = document.getElementById('skills-section');
+      const endorsedSkills = JSON.parse(localStorage.getItem('endorsedSkills') || '{}');
 
       if (skills.length === 0) {
         skillsSection.innerHTML = '<p>No skills added yet. Go to Edit Skills to add.</p>';
-      } else {
-        skillsSection.innerHTML = skills.map(skill => `
+        return;
+      }
+
+      skillsSection.innerHTML = skills.map(skill => {
+        const endorsementKey = `endorse_${skill.name}`;
+        const endorsementCount = parseInt(localStorage.getItem(endorsementKey)) || 0;
+        const isEndorsed = endorsedSkills[skill.name];
+
+        return `
           <div class="card">
             <h3>${skill.name}</h3>
             <p>${skill.description}</p>
+            <button class="endorse-btn" data-skill="${skill.name}" ${isEndorsed ? 'disabled class="endorsed"' : ''}>
+              ${isEndorsed ? 'Endorsed' : 'Endorse'}
+            </button>
+            <p><strong>Endorsements:</strong> <span id="endorse-count-${skill.name}">${endorsementCount}</span></p>
           </div>
-        `).join('');
-      }
+        `;
+      }).join('');
+
+      // Add event listeners to endorse buttons
+      document.querySelectorAll('.endorse-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const skillName = btn.getAttribute('data-skill');
+          const endorsementKey = `endorse_${skillName}`;
+          let count = parseInt(localStorage.getItem(endorsementKey)) || 0;
+
+          // Increment and save endorsement count
+          count++;
+          localStorage.setItem(endorsementKey, count);
+          document.getElementById(`endorse-count-${skillName}`).textContent = count;
+
+          // Mark as endorsed
+          const endorsedSkills = JSON.parse(localStorage.getItem('endorsedSkills') || '{}');
+          endorsedSkills[skillName] = true;
+          localStorage.setItem('endorsedSkills', JSON.stringify(endorsedSkills));
+
+          // Disable the button
+          btn.textContent = 'Endorsed';
+          btn.disabled = true;
+          btn.classList.add('endorsed');
+        });
+      });
     });
   </script>
+
+  <style>
+    .endorsed {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
 </body>
 </html>
